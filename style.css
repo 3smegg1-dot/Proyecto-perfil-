@@ -1,0 +1,249 @@
+/* Variables CSS para Coherencia de Colores y Modo Rosa Pastel */
+:root {
+    --primary-color: #F4AFC6; /* Rosa pastel */
+    --primary-color-hover: #F7D1DC; /* Hover pastel */
+    --primary-color-active: #E69AB7; /* Click activo */
+    /* Modo Claro */
+    --bg-light: #FFF0F6; /* Fondo rosado claro */
+    --text-light: #4A4A4A; /* Texto gris oscuro elegante (PARA CONTRASTAR CON ROSA) */
+    --navbar-bg-light: #FFF0F6; /* Fondo navbar claro */
+    --footer-bg-light: #8A6F78; /* Fondo footer claro */
+    /* Modo Oscuro */
+    --bg-dark: #343a40; /* Gris oscuro para el fondo */
+    --text-dark: #F8F9FA; /* Texto claro en modo oscuro */
+    --navbar-bg-dark: #343a40;
+    --footer-bg-dark: #212529; /* Gris aún más oscuro para el footer */
+
+    --gradient-color-1: #F4AFC6;
+    --gradient-color-2: #F7C9D4;
+    --gradient-color-3: #FADFE8;
+    --gradient-color-4: #FFDDEA;
+    --button-shadow: rgba(244, 175, 198, 0.5);
+    --transition-duration: 0.3s;
+}
+
+/* Base Body y Transición de Modo Oscuro */
+body {
+    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+    scroll-behavior: smooth;
+    color: var(--text-light); /* Color por defecto (modo claro) */
+    background-color: var(--bg-light); /* Fondo por defecto (modo claro) */
+}
+
+    /* Modo Oscuro (body.dark) */
+    body.dark {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+    }
+
+        /* Clases específicas para Modo Oscuro: Sobrescribir Bootstrap */
+        body.dark .bg-light {
+            background: var(--bg-dark) !important;
+        }
+
+        body.dark .navbar {
+            background: var(--navbar-bg-dark) !important;
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        body.dark .navbar-brand,
+        body.dark .nav-link {
+            color: var(--text-dark) !important;
+        }
+
+        /* Elementos con fondo gris claro: cards, secciones bg-light */
+        body.dark .card,
+        body.dark #projects {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+            border-color: var(--primary-color) !important;
+        }
+
+        body.dark .form-control {
+            background-color: #495057; /* Fondo de inputs oscuro */
+            border-color: #6c757d;
+            color: var(--text-dark);
+        }
+
+        body.dark .form-label {
+            color: var(--text-dark);
+        }
+
+        /* Footer oscuro en modo oscuro */
+        body.dark footer {
+            background-color: var(--footer-bg-dark) !important;
+        }
+
+        /* Ajuste de colores de texto e iconos */
+        body.dark i.fa-solid,
+        body.dark i.fa-regular {
+            color: var(--text-dark); /* Asegura que los iconos genéricos cambien */
+        }
+
+        body.dark .text-dark {
+            color: var(--text-dark) !important;
+        }
+
+        body.dark .text-muted {
+            color: var(--text-dark) !important;
+            opacity: 0.7;
+        }
+
+        /* Iconos de Redes Sociales */
+        body.dark .github-icon,
+        body.dark .fab.fa-x-twitter {
+            color: var(--text-dark) !important;
+        }
+
+        /* Icono del botón del modo oscuro */
+        body.dark #darkModeToggle {
+            color: var(--text-dark) !important; /* Ícono de sol blanco/claro */
+            background-color: var(--primary-color) !important;
+        }
+
+/* Botones */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background-color var(--transition-duration), box-shadow var(--transition-duration), transform var(--transition-duration);
+    box-shadow: 0 4px 6px var(--button-shadow);
+}
+
+    .btn-primary:hover {
+        background-color: var(--primary-color-hover) !important;
+        transform: translateY(-2px);
+        color: white !important;
+    }
+
+    .btn-primary:active {
+        background-color: var(--primary-color-active) !important;
+        transform: translateY(0);
+        box-shadow: 0 2px 4px var(--button-shadow);
+    }
+
+/* 1. Homepage Hero Gradiente Animado */
+.gradient-bg {
+    background: linear-gradient(-45deg, var(--gradient-color-1), var(--gradient-color-2), var(--gradient-color-3), var(--gradient-color-4));
+    background-size: 400% 400%;
+    animation: gradientShift 15s infinite ease;
+}
+
+/* CORRECCIÓN DE VISIBILIDAD DE TEXTO: */
+#home h1, #home p {
+    /* Si el body tiene la clase 'dark', el color será 'white'. 
+       Si NO tiene la clase 'dark' (Modo Claro/Fondo Rosa Pastel),
+       el color será el gris oscuro definido en --text-light */
+    color: var(--text-light) !important;
+}
+
+/* Sobrescribir el color del texto de home cuando el modo oscuro está activo */
+body.dark #home h1,
+body.dark #home p {
+    color: var(--text-dark) !important; /* Blanco */
+}
+
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Animación de Entrada Suave (fadeInUp) para Homepage */
+#home h1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 3. Proyectos Card Hover y Animación Heartbeat */
+.project-card {
+    border: 2px solid var(--primary-color) !important;
+    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+    cursor: pointer;
+    animation: heartbeat 3s infinite ease-in-out;
+}
+
+    .project-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 1rem 3rem rgba(244, 175, 198, 0.3) !important;
+    }
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+/* 4. Experiencia Card */
+.experience-card {
+    transition: box-shadow var(--transition-duration) ease;
+}
+
+    .experience-card:hover {
+        box-shadow: 0 0.5rem 1rem rgba(244, 175, 198, 0.3) !important;
+    }
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-duration);
+}
+
+    a:hover {
+        color: var(--primary-color-active);
+        text-decoration: underline;
+    }
+
+/* Optimizacin Responsive para Mviles */
+@media (max-width: 768px) {
+    .display-3 {
+        font-size: 2.5rem;
+    }
+
+    .display-5 {
+        font-size: 2rem;
+    }
+
+    .profile-img {
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    #darkModeToggle {
+        margin-left: auto;
+    }
+}
